@@ -35,3 +35,10 @@ void searchWikipedia(List<String>? arguments) {
 void printUsage() {
   print("The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>");
 }
+
+Future<String> getWikipediaArticle(String articleTitle) async {
+  final url = Uri.https(
+    'en.wikipedia.org', // Wikipedia API domain
+    '/api/rest_v1/page/summary/$articleTitle', // API path for article summary
+  );
+}
