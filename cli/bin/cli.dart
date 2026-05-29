@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cli/cli.dart';
 import 'package:command_runner/command_runner.dart';
 
@@ -24,5 +26,8 @@ void main(List<String> arguments) async {
         ..addCommand(SearchCommand(logger: errorLogger))
         ..addCommand(GetArticleCommand(logger: errorLogger));
 
-  app.run(arguments);
+  await app.run(arguments);
+
+  // Даём время на запись логов в файл
+  await Future.delayed(Duration(milliseconds: 200));
 }

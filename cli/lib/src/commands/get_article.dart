@@ -30,6 +30,12 @@ class GetArticleCommand extends Command {
     try {
       var title = args.commandArg ?? defaultValue;
       final List<Article> articles = await getArticleByTitle(title);
+
+      if (articles.isEmpty) {
+        logger.warning('No article found for title: "$title"');
+        return 'No article found for title: "$title"';
+      }
+
       // API returns a list of articles, but we only care about the closest hit.
       final article = articles.first;
       final buffer = StringBuffer('\n=== ${article.title.titleText} ===\n\n');
